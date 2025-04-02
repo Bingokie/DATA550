@@ -59,3 +59,18 @@ hist(random_numbers3)
 #| fig.cap = "Fourth set of random numbers"
 hist(random_numbers4)
 ```
+
+```{r}
+set.seed(5)
+random_numbers5 <- rgeom(100, 0.25)
+saveRDS(random_numbers5, file = "output/random_numbers5.rds")
+
+
+random_numbers5 <- readRDS("output/random_numbers5.rds")
+
+# New section in the report
+## Random Numbers 5
+summary(random_numbers5)
+hist(random_numbers5)
+```
+
