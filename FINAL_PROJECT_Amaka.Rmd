@@ -1,0 +1,62 @@
+---
+title: "Final Project 2"
+author: "amaka"
+date: "2025-02-18"
+output: html_document
+---
+```{r}
+options(repos = c(CRAN = "https://cloud.r-project.org/"))
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+install.packages("knitr") 
+install.packages("kableExtra")  
+library(readxl)
+library(dplyr)
+library(ggplot2)
+library(kableExtra)
+```
+
+```{r load-data}
+# Load the dataset
+library(readxl)
+file_path <- "Home/Downloads/Georgia_DPH_PUBLIC_Vaccination_Public_Data_in_Excel.xlsx"
+df <- read_excel("~/Downloads/Georgia_DPH_PUBLIC_Vaccination_Public_Data_in_Excel.xlsx", 
+                 sheet = "COUNTY_SUMMARY")
+
+
+head(df)
+colnames(df)
+```
+
+## Introduction  
+COVID-19 has disproportionately impacted underserved communities, with significant disparities in vaccination rates across different geographic, racial, and socioeconomic groups. This study aims to investigate the spatial distribution of COVID-19 vaccine providers and vaccination rates across Georgia, focusing on populations that are historically marginalized or have limited access to healthcare services.
+```{r}
+summary_table <- df %>%
+  group_by(COUNTY_NAME) %>%
+  summarize(
+    Total_Vaccinated = sum(PERSONCVAX, na.rm = TRUE),
+    Percent_Vaccinated = mean(PCTCUMPCVAX, na.rm = TRUE)
+  ) %>%
+  arrange(desc(Percent_Vaccinated))
+
+kable(summary_table, caption = "Summary of Vaccination Rates by County")
+```
+
+```{r}
+# Data Visualization
+
+ggplot(df, aes(x = reorder(COUNTY_NAME, -PERSONCVAX), y = PERSONCVAX)) +
+  geom_bar(stat = "identity", fill = "blue") +
+  coord_flip() +
+  labs(title = "COVID-19 Vaccination Rates by County in Georgia",
+       x = "County",
+       y = "Vaccination Rate (%)") +
+  theme_minimal()
+```
+# Discussion 
+
+The table above presents vaccination rates across different counties in Georgia, revealing disparities in vaccine distribution. The figure further highlights that certain counties have significantly lower vaccination rates, potentially due to limited healthcare access, socioeconomic barriers, or vaccine hesitancy. These insights can help policymakers develop targeted interventions to improve vaccine equity.
+```
+

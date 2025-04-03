@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Collaborative git exercise
 
 > Practice with branches, fetches, merges, and pushes
@@ -442,3 +443,23 @@ Both *User A* and *User B* should now ensure their local main branch is up to da
 - These commands should not do anything for *User A*, since they had already merged `devel-colors` into `main` in the above steps.
 - These commands __should do something__ for *User B*, since they had not updated their `main` branch with the changes on the `devel-colors` branch.
 
+=======
+# Code Description
+
+`code/Clean.R`
+- load the necessary packages
+- saves numbers as a `.rds` object in `output/` folder
+
+`code/Table.R`
+- reads data `code/Clean.R`
+- saves the sum of the two as a `.rds` object in `output/` folder
+
+`code/Viz.R`
+- reads data saved by `code/Table.R`
+- adds the value saved by `code/Clean.R` 
+- saves the sum as a `.rds` object in `output/` folder
+
+`FINAL_PROJECT_Amaka.Rmd`
+- loads each set of random numbers saved by the three `.R` scripts
+- makes a data visualization
+>>>>>>> 3a3817d (Added updated Makefile for project workflow)
